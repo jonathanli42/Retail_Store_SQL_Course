@@ -18,6 +18,8 @@ This project includes:
 
 ## Installation
 Create the tables by following the script in "Data/scripts_for_data.txt" 
+
+
 To utilize this project effectively, ensure you have the following tools installed:
 - Jupyter Notebook or any IDE that supports Python (for pandas)
 - SQL Server or any relational database system
