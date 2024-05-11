@@ -1,0 +1,112 @@
+DROP TABLE IF EXISTS Customer;
+CREATE TABLE Customer (
+    customer_id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    street_address VARCHAR(255),
+    state VARCHAR(50),
+    city VARCHAR(50),
+    zipcode INT,
+    phone_number VARCHAR(20)
+);
+
+
+DROP TABLE IF EXISTS Discount;
+CREATE TABLE Discount (
+    discount_id VARCHAR(36) PRIMARY KEY,
+    discount_description VARCHAR(255),
+    discount_type VARCHAR(50),
+    start_date DATE,
+    end_date DATE
+);
+
+
+DROP TABLE IF EXISTS Product;
+CREATE TABLE Product (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(255),
+    purchase_price DECIMAL(10, 2),
+    sales_price DECIMAL(10, 2),
+    active_status BOOLEAN
+);
+
+
+DROP TABLE IF EXISTS Marketing;
+CREATE TABLE Marketing (
+    campaign_id VARCHAR(50) PRIMARY KEY,
+    campaign_name VARCHAR(255),
+    start_date DATE,
+    end_date DATE,
+    budget DECIMAL(15, 2)
+);
+
+
+DROP TABLE IF EXISTS Orders;
+CREATE TABLE Orders (
+    order_id VARCHAR(36) PRIMARY KEY,
+    sales_price DECIMAL(10, 2),
+    units INT,
+    total_sales DECIMAL(10,2),
+    customer_id INT,
+    discount_id VARCHAR(36),
+    product_id INT,
+    sales_date DATE,
+    campaign_id VARCHAR(36),
+    order_type INT,
+    return_id VARCHAR(36),
+    discount_pct DECIMAL(10,2)
+);
+
+DROP TABLE IF EXISTS Returns;
+CREATE TABLE Returns (
+    return_id VARCHAR(36) PRIMARY KEY,
+    order_id VARCHAR(36),
+    customer_id INT,
+    product_id INT,
+    concession_reason VARCHAR(255),
+    return_date DATE
+);
+
+
+DROP TABLE IF EXISTS Clicks;
+CREATE TABLE Clicks (
+    click_id VARCHAR(36) PRIMARY KEY,
+    customer_id INT NULL,
+    product_id INT,
+    campaign_id VARCHAR(36),
+    click_date TIMESTAMP,
+    device_type VARCHAR(50),
+    order_id VARCHAR(36),
+    session_id VARCHAR(255)
+);
+
+PSQL Shell 
+Enter details 
+Server [localhost]: localhost
+Database [postgres]: test_dataset
+Port [5432]: 5432
+Username [postgres]: postgres
+Password for user postgres: enterpassword
+
+\copy Customer FROM 'path\customers_data.csv' WITH (FORMAT csv, HEADER);
+\copy Discount FROM 'path\discount_data.csv' WITH (FORMAT csv, HEADER);
+\copy Product FROM 'path\product_data.csv' WITH (FORMAT csv, HEADER);
+\copy Marketing FROM 'path\marketing_data.csv' WITH (FORMAT csv, HEADER);
+\copy Orders FROM 'path\orders_data.csv' WITH (FORMAT csv, HEADER);
+\copy Returns FROM 'path\returns_data.csv' WITH (FORMAT csv, HEADER);
+\copy Clicks FROM 'path\clicks_data.csv' WITH (FORMAT csv, HEADER);
+
+
+select * from clicks;
+
+select * from customer;
+
+select * from discount;
+
+select * from marketing;
+
+select * from orders;
+
+select * from product;
+
+select * from returns; 
+
